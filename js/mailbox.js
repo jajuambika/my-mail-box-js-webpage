@@ -132,13 +132,17 @@ function showMessagesItemsInbox(){
     {
         messageItemContainer[0].classList.remove('display-none');
         noMessageEle[0].className += ' display-none';
-        previewInnerContainer[0].classList.remove('display-none');
+
+        if(previewInnerContainer.length > 0)
+            previewInnerContainer[0].classList.remove('display-none');
     }
     else
     {
         messageItemContainer[0].className += ' display-none';
         noMessageEle[0].classList.remove('display-none');
-        previewInnerContainer[0].className += ' display-none';
+
+        if(previewInnerContainer.length > 0)
+            previewInnerContainer[0].className += ' display-none';
     }
 
 }
@@ -153,7 +157,9 @@ function showMessagesItemsSent(){
 
     messageItemContainer[0].className += ' display-none';
     noMessageEle[0].classList.remove('display-none');
-    previewInnerContainer[0].className += ' display-none';
+
+    if(previewInnerContainer.length > 0)
+        previewInnerContainer[0].className += ' display-none';
 }
 
 /**
@@ -166,7 +172,9 @@ function showMessagesItemsDraft(){
 
     messageItemContainer[0].className += ' display-none';
     noMessageEle[0].classList.remove('display-none');
-    previewInnerContainer[0].className += ' display-none';
+
+    if(previewInnerContainer.length > 0)
+        previewInnerContainer[0].className += ' display-none';
 }
 
 /**
@@ -179,5 +187,7 @@ function showMessagesItemsTrash(){
 
     messageItemContainer[0].className += ' display-none';
     noMessageEle[0].classList.remove('display-none');
-    previewInnerContainer[0].className += ' display-none';
+
+    if(previewInnerContainer.length > 0)
+        previewInnerContainer[0].className += ' display-none';
 }

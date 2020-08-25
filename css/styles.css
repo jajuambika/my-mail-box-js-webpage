@@ -28,10 +28,12 @@
     font-size: 25px;
     color: #818181;
     display: block;
+    cursor: pointer;
   }
   
   .side-nav a:hover {
-    color: #f1f1f1;
+    background-color: #f1f1f1;  
+    color: black;
   } 
 
   .message-count{
@@ -93,6 +95,7 @@
   .message-item{
       border-bottom: 1px solid black;
       padding: 1rem;
+      cursor: pointer;
   }
 
   .message-title{
