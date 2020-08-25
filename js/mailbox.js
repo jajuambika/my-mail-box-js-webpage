@@ -4,10 +4,17 @@ var DRAFT = "3";
 var TRASH = "4";
 var messageCount = 0;
 
+/**
+ * This function will add new email on clicking of compose button
+ * @param {*} thisEle 
+ */
 function onClickNavMenu(thisEle){ 
     addMessagesInInbox();
 }
 
+/**
+ * Inner function used by compose button
+ */
 function addMessagesInInbox(){
 
     var messageItemContainer = document.getElementsByClassName('message-item-container');
@@ -58,23 +65,28 @@ function showDetailedMessages(thisEle){
     let messageItemTitleEle = thisEle.getElementsByClassName('message-title');
     var inboxEle = document.getElementById("1");
     var messageCountDiv = inboxEle.getElementsByClassName("message-count");
+    var isNewMail = !messageItemNewTag[0].classList.contains("display-none");
 
-    if(!messageItemNewTag[0].classList.contains("display-none"))
+    if(isNewMail)
     {
         messageItemNewTag[0].className += ' display-none';
     }
 
+    var previewInnerContainer = document.createElement('div');
     var messageItemTitle = document.createElement('h3');
     var messageItemDetailText = document.createElement('div');
 
     messageItemTitle.innerText = messageItemTitleEle[0].innerHTML;
     messageItemDetailText.innerText = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).";
 
-    previewContainer[0].innerHTML = "";
-    previewContainer[0].appendChild(messageItemTitle);
-    previewContainer[0].appendChild(messageItemDetailText);
+    previewInnerContainer.className = "preview-inner-container";
+    previewInnerContainer.appendChild(messageItemTitle);
+    previewInnerContainer.appendChild(messageItemDetailText);
 
-    if(messageCount > 0)
+    previewContainer[0].innerHTML = "";
+    previewContainer[0].appendChild(previewInnerContainer);
+
+    if(isNewMail && messageCount > 0)
     {
         messageCount--;
         if(messageCount > 0)
@@ -85,7 +97,7 @@ function showDetailedMessages(thisEle){
 }
 
 /**
- * 
+ * This function will call function related to nav
  * @param {*} this 
  */
 function showMessages(thisEle){
@@ -107,47 +119,65 @@ function showMessages(thisEle){
       }
 }
 
+/**
+ * Function will show mail messages list related to inbox nav
+ */
 function showMessagesItemsInbox(){
     let messageItemContainer = document.getElementsByClassName('message-item-container');
     let messageItemsList = messageItemContainer[0].getElementsByClassName('message-item');
     let noMessageEle = document.getElementsByClassName('no-message');
+    let previewInnerContainer = document.getElementsByClassName('preview-inner-container');
 
     if(messageItemsList.length != 0)
     {
         messageItemContainer[0].classList.remove('display-none');
         noMessageEle[0].className += ' display-none';
+        previewInnerContainer[0].classList.remove('display-none');
     }
     else
     {
         messageItemContainer[0].className += ' display-none';
         noMessageEle[0].classList.remove('display-none');
+        previewInnerContainer[0].className += ' display-none';
     }
 
 }
 
+/**
+ * Function will show messages item in SENT nav
+ */
 function showMessagesItemsSent(){
     let messageItemContainer = document.getElementsByClassName('message-item-container');
-    let messageItemsList = messageItemContainer[0].getElementsByClassName('message-item');
     let noMessageEle = document.getElementsByClassName('no-message');
+    let previewInnerContainer = document.getElementsByClassName('preview-inner-container');
 
     messageItemContainer[0].className += ' display-none';
     noMessageEle[0].classList.remove('display-none');
+    previewInnerContainer[0].className += ' display-none';
 }
 
+/**
+ * Function will show messages item in DRAFT nav
+ */
 function showMessagesItemsDraft(){
     let messageItemContainer = document.getElementsByClassName('message-item-container');
-    let messageItemsList = messageItemContainer[0].getElementsByClassName('message-item');
     let noMessageEle = document.getElementsByClassName('no-message');
+    let previewInnerContainer = document.getElementsByClassName('preview-inner-container');
 
     messageItemContainer[0].className += ' display-none';
     noMessageEle[0].classList.remove('display-none');
+    previewInnerContainer[0].className += ' display-none';
 }
 
+/**
+ * Function will show messages item in TRASH nav
+ */
 function showMessagesItemsTrash(){
     let messageItemContainer = document.getElementsByClassName('message-item-container');
-    let messageItemsList = messageItemContainer[0].getElementsByClassName('message-item');
     let noMessageEle = document.getElementsByClassName('no-message');
+    let previewInnerContainer = document.getElementsByClassName('preview-inner-container');
 
     messageItemContainer[0].className += ' display-none';
     noMessageEle[0].classList.remove('display-none');
+    previewInnerContainer[0].className += ' display-none';
 }
