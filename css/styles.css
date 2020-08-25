@@ -110,3 +110,10 @@
     height: 10px;
     border-radius: 10px;
   }
+
+  .delete-mail{
+    color: blue;
+    margin: 1rem;
+    float: right;
+    cursor: pointer;
+  }

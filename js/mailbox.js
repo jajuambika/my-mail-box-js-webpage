@@ -75,13 +75,20 @@ function showDetailedMessages(thisEle){
     var previewInnerContainer = document.createElement('div');
     var messageItemTitle = document.createElement('h3');
     var messageItemDetailText = document.createElement('div');
+    var deleteLink = document.createElement('a');
 
     messageItemTitle.innerText = messageItemTitleEle[0].innerHTML;
     messageItemDetailText.innerText = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).";
+    deleteLink.className = 'delete-mail';
+    deleteLink.innerHTML = "Trash mail";
+    deleteLink.setAttribute("onclick", "deleteMail(this)");
+    deleteLink.setAttribute("mail-item-id", messageId);
 
     previewInnerContainer.className = "preview-inner-container";
+    previewInnerContainer.setAttribute('mail-id', messageId);
     previewInnerContainer.appendChild(messageItemTitle);
     previewInnerContainer.appendChild(messageItemDetailText);
+    previewInnerContainer.appendChild(deleteLink);
 
     previewContainer[0].innerHTML = "";
     previewContainer[0].appendChild(previewInnerContainer);
@@ -124,7 +131,7 @@ function showMessages(thisEle){
  */
 function showMessagesItemsInbox(){
     let messageItemContainer = document.getElementsByClassName('message-item-container');
-    let messageItemsList = messageItemContainer[0].getElementsByClassName('message-item');
+    let messageItemsList = document.querySelectorAll('.message-item:not(.display-none)');
     let noMessageEle = document.getElementsByClassName('no-message');
     let previewInnerContainer = document.getElementsByClassName('preview-inner-container');
 
@@ -190,4 +197,29 @@ function showMessagesItemsTrash(){
 
     if(previewInnerContainer.length > 0)
         previewInnerContainer[0].className += ' display-none';
+}
+
+/**
+ * Function will hide mail item in list and delete preview
+ * @param {*} thisEle 
+ */
+function deleteMail(thisEle){
+    var mailId = thisEle.getAttribute('mail-item-id');
+    var previewContainer = document.getElementsByClassName('preview-message');
+    var messageId = document.getElementById(mailId);
+
+    let messageItemContainer = document.getElementsByClassName('message-item-container');
+    let noMessageEle = document.getElementsByClassName('no-message');
+
+    previewContainer[0].innerHTML = "";
+    messageId.setAttribute("tab-id", "4");
+    messageId.className += " display-none";
+
+    let messageItemsList = document.querySelectorAll('.message-item:not(.display-none)');
+    
+    if(messageItemsList.length == 0)
+    {
+        messageItemContainer[0].className += " display-none";
+        noMessageEle[0].classList.remove('display-none');
+    }  
 }
