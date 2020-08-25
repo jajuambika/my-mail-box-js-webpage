@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>My mailbox</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="css/styles.css">
+    </head>
+    <body>
+        <div class="row">
+            <div class="side-nav">
+                <a onclick="onClickNavMenu(this)">Compose</a>
+                <a id="1" onclick="showMessages(this)">
+                    Inbox
+                    <div class="message-count"></div>
+                </a>
+                <a id="2" onclick="showMessages(this)">Sent</a>
+                <a id="3" onclick="showMessages(this)">Draft</a>
+                <a id="4" onclick="showMessages(this)">Trash</a>
+            </div>
+            
+            <div class="message-list display-flex">
+                <div class="no-message">Nothing to show right now, good job !</div>
+                <div class="message-item-container w-100 display-none"></div>
+            </div>
+            
+            <div class="preview-message">
+
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Created by Ambika Jaju</p>
+        </div>
+        
+        <script src="js/mailbox.js"></script>
+    </body>
+</html>

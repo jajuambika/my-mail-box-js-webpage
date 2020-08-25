@@ -1,0 +1,109 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+  }
+
+  .display-none{
+      display: none !important;
+  }
+
+  .side-nav {
+    height: 90%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: black;
+    overflow-x: hidden;
+    padding-top: 20px;
+  }
+  
+  .side-nav a {
+    padding: 6px 6px 6px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+  }
+  
+  .side-nav a:hover {
+    color: #f1f1f1;
+  } 
+
+  .message-count{
+    right: 0px;
+    float: right;
+    padding-right: 1rem;
+  }
+
+  .message-list{
+    height: 90%;
+    width: 300px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 200px;
+    background-color: #f1f1f1;
+    overflow-x: hidden;
+  }
+
+  .no-message{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1rem;
+  }
+  
+  .preview-message{
+    height: 90%;
+    width: 60%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 500px;
+    background-color: white;
+    overflow-x: hidden;
+    padding: 1rem;
+  }
+
+  .footer {
+    height: 10%;  
+    width: 100%;
+    background-color: #f1f1f1;
+    padding: 10px;
+    text-align: center;
+    bottom:0px;
+    position: fixed;
+    z-index: 2;
+  }
+
+  .w-100{
+    width: 100%;
+  }
+
+  .display-flex{
+      display: flex;
+  }
+
+  /* Message styles starts */
+  .message-item{
+      border-bottom: 1px solid black;
+      padding: 1rem;
+  }
+
+  .message-title{
+    width: 80%;
+    display: inline-block;
+  }
+
+  .blue-dot{
+    display: inline-block;
+    background-color: blue;
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+  }
