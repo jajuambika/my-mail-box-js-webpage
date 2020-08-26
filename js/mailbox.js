@@ -3,6 +3,7 @@ var SENT = "2";
 var DRAFT = "3";
 var TRASH = "4";
 var messageCount = 0;
+var trashMailCount = 0;
 
 /**
  * This function will add new email on clicking of compose button
@@ -22,6 +23,7 @@ function addMessagesInInbox(){
     var navId = navId;
     var inboxEle = document.getElementById("1");
     var messageCountDiv = inboxEle.getElementsByClassName("message-count");
+    let previewInnerContainer = document.getElementsByClassName('preview-inner-container');
 
     noMessageEle[0].className += ' display-none';
 
@@ -49,9 +51,32 @@ function addMessagesInInbox(){
 
     messageItemContainer[0].insertBefore(messageItemEle, messageItemContainer[0].childNodes[0]);
     messageItemContainer[0].classList.remove("display-none");
-   
+
     messageCount++;
     messageCountDiv[0].innerText = messageCount;
+
+    let messageItemsListInTrash = document.querySelectorAll('.message-item:not([tab-id="1"])');
+    let messageItemsListInInbox = document.querySelectorAll('.message-item:not([tab-id="4"])');
+
+    if(messageItemsListInInbox.length > 0){
+        for(let i=0; i < messageItemsListInTrash.length; i++) {
+            messageItemsListInTrash[i].className += " display-none"; 
+        } 
+        
+        for(let i=0; i < messageItemsListInInbox.length; i++) {
+            messageItemsListInInbox[i].classList.remove("display-none"); 
+        } 
+
+        messageItemContainer[0].classList.remove("display-none"); 
+        noMessageEle[0].className += " display-none";
+    }
+    else{
+        messageItemContainer[0].className += ' display-none';
+        noMessageEle[0].classList.remove('display-none');
+
+        if(previewInnerContainer.length > 0)
+            previewInnerContainer[0].className += ' display-none';
+    }
 }
 
 /**
@@ -66,6 +91,7 @@ function showDetailedMessages(thisEle){
     var inboxEle = document.getElementById("1");
     var messageCountDiv = inboxEle.getElementsByClassName("message-count");
     var isNewMail = !messageItemNewTag[0].classList.contains("display-none");
+    var tabId = thisEle.getAttribute('tab-id');
 
     if(isNewMail)
     {
@@ -88,7 +114,9 @@ function showDetailedMessages(thisEle){
     previewInnerContainer.setAttribute('mail-id', messageId);
     previewInnerContainer.appendChild(messageItemTitle);
     previewInnerContainer.appendChild(messageItemDetailText);
-    previewInnerContainer.appendChild(deleteLink);
+
+    if(tabId != 4)
+        previewInnerContainer.appendChild(deleteLink);
 
     previewContainer[0].innerHTML = "";
     previewContainer[0].appendChild(previewInnerContainer);
@@ -131,27 +159,30 @@ function showMessages(thisEle){
  */
 function showMessagesItemsInbox(){
     let messageItemContainer = document.getElementsByClassName('message-item-container');
-    let messageItemsList = document.querySelectorAll('.message-item:not(.display-none)');
     let noMessageEle = document.getElementsByClassName('no-message');
     let previewInnerContainer = document.getElementsByClassName('preview-inner-container');
+    let messageItemsListInTrash = document.querySelectorAll('.message-item:not([tab-id="1"])');
+    let messageItemsListInInbox = document.querySelectorAll('.message-item:not([tab-id="4"])');
 
-    if(messageItemsList.length != 0)
-    {
-        messageItemContainer[0].classList.remove('display-none');
-        noMessageEle[0].className += ' display-none';
+    if(messageItemsListInInbox.length > 0){
+        for(let i=0; i < messageItemsListInTrash.length; i++) {
+            messageItemsListInTrash[i].className += " display-none"; 
+        } 
+        
+        for(let i=0; i < messageItemsListInInbox.length; i++) {
+            messageItemsListInInbox[i].classList.remove("display-none"); 
+        } 
 
-        if(previewInnerContainer.length > 0)
-            previewInnerContainer[0].classList.remove('display-none');
+        messageItemContainer[0].classList.remove("display-none"); 
+        noMessageEle[0].className += " display-none";
     }
-    else
-    {
+    else{
         messageItemContainer[0].className += ' display-none';
         noMessageEle[0].classList.remove('display-none');
-
-        if(previewInnerContainer.length > 0)
-            previewInnerContainer[0].className += ' display-none';
     }
 
+    if(previewInnerContainer.length > 0)
+            previewInnerContainer[0].className += ' display-none';
 }
 
 /**
@@ -191,10 +222,26 @@ function showMessagesItemsTrash(){
     let messageItemContainer = document.getElementsByClassName('message-item-container');
     let noMessageEle = document.getElementsByClassName('no-message');
     let previewInnerContainer = document.getElementsByClassName('preview-inner-container');
+    let messageItemsListInTrash = document.querySelectorAll('.message-item:not([tab-id="1"])');
+    let messageItemsListInInbox = document.querySelectorAll('.message-item:not([tab-id="4"])');
 
-    messageItemContainer[0].className += ' display-none';
-    noMessageEle[0].classList.remove('display-none');
+    if(messageItemsListInTrash.length > 0){
+        for(let i=0; i < messageItemsListInInbox.length; i++) {
+            messageItemsListInInbox[i].className += " display-none"; 
+        } 
+        
+        for(let i=0; i < messageItemsListInTrash.length; i++) {
+            messageItemsListInTrash[i].classList.remove("display-none"); 
+        } 
 
+        messageItemContainer[0].classList.remove("display-none"); 
+        noMessageEle[0].className += " display-none";
+    }
+    else{
+        messageItemContainer[0].className += ' display-none';
+        noMessageEle[0].classList.remove('display-none');
+    }
+    
     if(previewInnerContainer.length > 0)
         previewInnerContainer[0].className += ' display-none';
 }
@@ -207,6 +254,7 @@ function deleteMail(thisEle){
     var mailId = thisEle.getAttribute('mail-item-id');
     var previewContainer = document.getElementsByClassName('preview-message');
     var messageId = document.getElementById(mailId);
+    var deleteCountEle = document.getElementsByClassName('delete-count');
 
     let messageItemContainer = document.getElementsByClassName('message-item-container');
     let noMessageEle = document.getElementsByClassName('no-message');
@@ -215,6 +263,9 @@ function deleteMail(thisEle){
     messageId.setAttribute("tab-id", "4");
     messageId.className += " display-none";
 
+    trashMailCount++;
+    deleteCountEle[0].innerText = trashMailCount;
+  
     let messageItemsList = document.querySelectorAll('.message-item:not(.display-none)');
     
     if(messageItemsList.length == 0)
